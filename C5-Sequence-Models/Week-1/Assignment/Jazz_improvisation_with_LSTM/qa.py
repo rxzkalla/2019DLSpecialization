@@ -24,10 +24,7 @@ def __roundUp(num, mult):
 ''' Helper function that, based on if upDown < 0 or upDown >= 0, rounds number 
     down or up respectively to nearest multiple of mult. '''
 def __roundUpDown(num, mult, upDown):
-    if upDown < 0:
-        return __roundDown(num, mult)
-    else:
-        return __roundUp(num, mult)
+    return __roundDown(num, mult) if upDown < 0 else __roundUp(num, mult)
 
 ''' Helper function, from recipes, to iterate over list in chunks of n 
     length. '''
@@ -54,7 +51,7 @@ def prune_grammar(curr_grammar):
 ''' Remove repeated notes, and notes that are too close together. '''
 def prune_notes(curr_notes):
     for n1, n2 in __grouper(curr_notes, n=2):
-        if n2 == None: # corner case: odd-length list
+        if n2 is None: # corner case: odd-length list
             continue
         if isinstance(n1, note.Note) and isinstance(n2, note.Note):
             if n1.nameWithOctave == n2.nameWithOctave:
